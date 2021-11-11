@@ -41,11 +41,15 @@ Product.init(
       defaultValue: 10,
       validate: {
         isNumeric: true,
-      }
-    }
+      },
+      references: {
+        model: 'Category',
+        key: 'id',
+      },
+    },
   },
   {
-    sequelize,
+    sequelize: sequelize,
     timestamps: false,
     freezeTableName: true,
     underscored: true,
