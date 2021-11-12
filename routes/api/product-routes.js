@@ -8,8 +8,13 @@ router.get("/", (req, res) => {
   // find all products
   // be sure to include its associated Category and Tag data
   Product.findAll({
-    include: Category,
-    inclue: Tag
+    include: [
+      Category,
+      {
+        model: Tag,
+        through: ProductTag,
+      },
+    ],
   })
     .then((product) => res.status(200).json(product))
   // .include(
@@ -114,7 +119,7 @@ router.put('/:id', (req, res) => {
     })
     .then((updatedProductTags) => res.status(200).json(updatedProductTags))
     .catch((err) => {
-      // console.log(err);
+      console.log(err);
       res.status(400).json(err);
     });
 });
